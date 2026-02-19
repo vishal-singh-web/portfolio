@@ -1,0 +1,23 @@
+[
+  {
+    "id": "p1",
+    "title": "Minimal Notes",
+    "desc": "A tiny journal app focused on calm UX",
+    "tags": ["Personal", "React"],
+    "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": "p2",
+    "title": "Campus Map",
+    "desc": "Interactive map for student events",
+    "tags": ["Academic", "Map"],
+    "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": "p3",
+    "title": "Collab Studio",
+    "desc": "Real-time collaborative design tool",
+    "tags": ["Collaborative", "Realtime"],
+    "image": "https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?q=80&w=1200&auto=format&fit=crop"
+  }
+]

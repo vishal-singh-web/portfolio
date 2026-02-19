@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700;900&family=Caveat:wght@400;700&display=swap');
+
+:root{
+  --bg: #0a0a0c;
+  --accent: #3b82f6;
+}
+
+@import "tailwindcss";
+
+html,body,#root{
+  height:100%;
+}
+
+body{
+  @apply bg-[color:var(--bg)] text-slate-200 font-sans;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+}
+
+.electric-glow{
+  box-shadow: 0 0 18px rgba(59,130,246,0.25);
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 6px 20px rgba(59,130,246,0.06);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(59,130,246,0.12);
+  }
+}
+
+.breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.backdrop-strong {
+  backdrop-filter: blur(10px) saturate(120%);
+}
+
+/* Enhanced Turning Point Card Border */
+.turning-point-card {
+  border: 2px dashed rgba(59, 130, 246, 0.4);
+  border-radius: 1.5rem;
+}
+
+/* Pulse animation for FAB */
+@keyframes pulse-electric {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7), 0 0 20px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0), 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+.pulse-electric {
+  animation: pulse-electric 2s infinite;
+}
+
+/* Sticky note skew */
+.sticky-note {
+  font-family: 'Caveat', cursive;
+  background: #1a1a2e;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(59, 130, 246, 0.1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.sticky-note:hover {
+  box-shadow: 
+    0 25px 30px -5px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+/* Polaroid style - Mini Polaroids */
+.polaroid {
+  position: relative;
+  background: #fafaf9;
+  border: 8px solid #fafaf9;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.polaroid::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(3px);
+}
+
+/* Polaroid content area */
+.polaroid-content {
+  padding: 1rem 1rem 3rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.polaroid-name {
+  font-family: 'Caveat', cursive;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.polaroid-date {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.polaroid-message {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #374151;
+  word-break: break-word;
+}
+
+/* Scrapbook tilt effect */
+.scrapbook-tilt-1 { transform: rotate(-3deg); }
+.scrapbook-tilt-2 { transform: rotate(2deg); }
+.scrapbook-tilt-3 { transform: rotate(-1deg); }
+
+/* 3D Book spine effect */
+.book-spine {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.book-spine:hover {
+  transform: rotateY(15deg);
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+/* Constellation connections */
+.constellation-line {
+  stroke: rgba(59, 130, 246, 0.3);
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+}
+
+/* Scroll path animation */
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.path-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPath 3s ease-in-out forwards;
+}
+@keyframes swing {
+    0% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+  }
