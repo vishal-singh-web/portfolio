@@ -157,18 +157,6 @@ export default function Page() {
               <EmptyStateFallback section="certificates" />
             </div>
           )}
-
-          {/* Show all certificates in list view */}
-          {certificates.length > 3 && (
-            <>
-              <h3 className="mt-12 font-serif text-2xl text-white">All Certificates</h3>
-              <div className="mt-6 space-y-3">
-                {certificates.map(cert => (
-                  <CertificateCard key={cert.id} {...cert} variant="list" />
-                ))}
-              </div>
-            </>
-          )}
         </section>
 
         {/* ============================================================ */}
