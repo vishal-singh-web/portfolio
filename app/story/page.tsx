@@ -1,43 +1,15 @@
 "use client"
+
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-
-const storyMilestones = [
-  {
-    year: '2010',
-    title: 'First Code',
-    description: 'Started tinkering with HTML and CSS. Built my first website — a Pokémon fan page.',
-    image: '🖥️'
-  },
-  {
-    year: '2015',
-    title: 'Learning Phase',
-    description: 'Dove deep into JavaScript, React, and full-stack development. Built countless projects.',
-    image: '📚'
-  },
-  {
-    year: '2018',
-    title: 'The Turning Point',
-    description: 'Faced a major project failure. Learned the value of resilience, iteration, and empathy.',
-    image: '⛰️'
-  },
-  {
-    year: '2020',
-    title: 'Leading Teams',
-    description: 'Shifted focus to mentoring and building collaborative environments. Discovered my passion for process.',
-    image: '🤝'
-  },
-  {
-    year: '2024',
-    title: 'Thoughtful Design',
-    description: 'Now building systems that are beautiful, accessible, and genuinely human-centered.',
-    image: '✨'
-  }
-]
+import { usePortfolioData } from '../../hooks/usePortfolioData'
+import { LoadingScreen } from '../../components/LoadingScreen'
+import { DataErrorFallback, EmptyStateFallback } from '../../components/ErrorFallback'
 
 export default function Story() {
   const svgRef = useRef<SVGSVGElement>(null)
-  const [pathLength, setPathLength] = useState(0)
+  const [, setPathLength] = useState(0)
+  const { story, loading, error } = usePortfolioData()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +22,7 @@ export default function Story() {
       setPathLength(length)
 
       const rect = svgRef.current.getBoundingClientRect()
-      const scrollPercent = 1 - (rect.top / window.innerHeight)
+      const scrollPercent = 1 - rect.top / window.innerHeight
       const clampedPercent = Math.max(0, Math.min(1, scrollPercent))
 
       path.style.strokeDashoffset = String(length * (1 - clampedPercent))
@@ -62,9 +34,20 @@ export default function Story() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  if (loading) {
+    return <LoadingScreen />
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen pt-20">
+        <DataErrorFallback error={error} section="Story" />
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-[color:var(--bg)] pt-20 pb-20">
-      {/* Hero */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -72,12 +55,12 @@ export default function Story() {
         transition={{ duration: 0.7 }}
         className="max-w-4xl mx-auto px-6 mb-20 text-center">
         <h1 className="font-serif text-5xl md:text-6xl text-white mb-4">My Story</h1>
-        <p className="text-slate-300 text-lg max-w-2xl mx-auto">A journey of curiosity, learning, and growth. From first lines of code to building meaningful experiences.</p>
+        <p className="text-slate-300 text-lg max-w-2xl mx-auto">
+          A journey of curiosity, learning, and growth. From first lines of code to building meaningful experiences.
+        </p>
       </motion.section>
 
-      {/* Timeline with SVG Path */}
       <div className="max-w-4xl mx-auto px-6 relative">
-        {/* SVG Path */}
         <svg
           ref={svgRef}
           className="absolute left-1/2 top-0 bottom-0 w-1 h-full transform -translate-x-1/2 pointer-events-none"
@@ -102,41 +85,40 @@ export default function Story() {
           </defs>
         </svg>
 
-        {/* Milestones */}
         <div className="space-y-12">
-          {storyMilestones.map((milestone, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6 }}
-              className={`flex items-center gap-8 ${idx % 2 === 0 ? 'flex-row-reverse' : ''}`}>
-              
-              {/* Timeline Dot */}
-              <div className="relative flex-shrink-0">
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-electric/10 rounded-full blur-xl" />
-                <div className="relative w-6 h-6 bg-electric rounded-full border-2 border-electric shadow-lg electric-glow" />
-              </div>
-
-              {/* Content */}
+          {story.length > 0 ? (
+            story.map((milestone, idx) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex-1 glass backdrop-strong p-6 rounded-xl border border-white/6">
-                <div className="text-3xl mb-2">{milestone.image}</div>
-                <div className="text-electric font-semibold text-sm mb-1">{milestone.year}</div>
-                <h3 className="font-serif text-2xl text-white mb-2">{milestone.title}</h3>
-                <p className="text-slate-300">{milestone.description}</p>
+                key={milestone.id}
+                initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6 }}
+                className={`flex items-center gap-8 ${idx % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                <div className="relative flex-shrink-0">
+                  <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-electric/10 rounded-full blur-xl" />
+                  <div className="relative w-6 h-6 bg-electric rounded-full border-2 border-electric shadow-lg electric-glow" />
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="flex-1 glass backdrop-strong p-6 rounded-xl border border-white/6">
+                  {milestone.emoji && <div className="text-3xl mb-2">{milestone.emoji}</div>}
+                  <div className="text-electric font-semibold text-sm mb-1">{milestone.year}</div>
+                  <h3 className="font-serif text-2xl text-white mb-2">{milestone.title}</h3>
+                  <p className="text-slate-300">{milestone.description}</p>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))
+          ) : (
+            <EmptyStateFallback section="story milestones" />
+          )}
         </div>
       </div>
 
-      {/* CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
