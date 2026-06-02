@@ -113,7 +113,7 @@ export default function Page() {
         {/* ============================================================ */}
         <section id="projects" className="max-w-6xl mx-auto px-6 py-12">
           <h2 className="font-serif text-3xl text-white">The Best of Me</h2>
-          <p className="mt-3 text-slate-300 max-w-2xl">Featured projects with automatic image fallback</p>
+          <p className="mt-3 text-slate-300 max-w-2xl">Featured projects</p>
 
           {projects.filter(p => p.featured).length > 0 ? (
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -143,7 +143,7 @@ export default function Page() {
         <section id="certificates" className="max-w-6xl mx-auto px-6 py-12">
           <h2 className="font-serif text-3xl text-white">Top Certificates</h2>
           <p className="mt-3 text-slate-300 max-w-2xl">
-            Images auto-generate from naming convention if not in database
+            Papers that shows my work
           </p>
 
           {certificates.length > 0 ? (
@@ -156,18 +156,6 @@ export default function Page() {
             <div className="mt-6">
               <EmptyStateFallback section="certificates" />
             </div>
-          )}
-
-          {/* Show all certificates in list view */}
-          {certificates.length > 3 && (
-            <>
-              <h3 className="mt-12 font-serif text-2xl text-white">All Certificates</h3>
-              <div className="mt-6 space-y-3">
-                {certificates.map(cert => (
-                  <CertificateCard key={cert.id} {...cert} variant="list" />
-                ))}
-              </div>
-            </>
           )}
         </section>
 
