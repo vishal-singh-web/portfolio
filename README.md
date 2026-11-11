@@ -209,6 +209,10 @@ To deploy your own version:
 3. Add the Supabase environment variables.
 4. Deploy the app.
 
+Vercel calls `/api/keep-alive` once per day at midnight UTC to keep the Supabase
+free-tier project active. The cron is configured in `vercel.json` and requires
+the same Supabase environment variables as the rest of the app.
+
 ## Notes
 
 - Portfolio content is managed through Supabase.
