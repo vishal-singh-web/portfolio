@@ -222,4 +222,4 @@ Vishal Singh
 
 ## License
 
-This project is for personal portfolio and learning purposes. Add a license file if you want to define open-source usage terms.
+This project is for personal portfolio and learning purposes. Licensed Under MIT LICENSE.
