@@ -3,7 +3,6 @@
 A modern personal portfolio website built with Next.js, React, TypeScript, Tailwind CSS, Supabase, Motion, and EmailJS. The site showcases Vishal Singh's profile, experience, projects, credentials, skills, bookshelf, story, resume, contact form, and realtime guestbook.
 
 **Live Demo:** https://vishalsinghbuilds.vercel.app  
-**Repository:** https://github.com/vishal-singh-web/portfolio
 
 ## Features
 
